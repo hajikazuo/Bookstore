@@ -1,4 +1,4 @@
-﻿namespace Bookstore.Api.Models
+﻿namespace Bookstore.Domain.Models
 {
     public class BookClientLending
     {

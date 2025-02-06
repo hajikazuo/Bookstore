@@ -1,9 +1,9 @@
-﻿using Bookstore.Api.Context;
-using Bookstore.Api.Interfaces;
-using Bookstore.Api.Models;
+﻿using Bookstore.Domain.Interfaces;
+using Bookstore.Domain.Models;
+using Bookstore.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 
-namespace Bookstore.Api.Repositories
+namespace Bookstore.Infrastructure.Repositories
 {
     public class ClientRepository : IClientRepository
     {
@@ -24,7 +24,7 @@ namespace Bookstore.Api.Repositories
         }
         public void Add(Client client)
         {
-            _context.Clients.Add(client);   
+            _context.Clients.Add(client);
         }
         public void Update(Client client)
         {

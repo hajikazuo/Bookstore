@@ -1,6 +1,6 @@
-﻿using Bookstore.Api.Models;
+﻿using Bookstore.Domain.Models;
 
-namespace Bookstore.Api.Interfaces
+namespace Bookstore.Domain.Interfaces
 {
     public interface IClientRepository
     {

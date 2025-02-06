@@ -1,7 +1,7 @@
-using Bookstore.Api.Context;
-using Bookstore.Api.Interfaces;
-using Bookstore.Api.Mappings;
-using Bookstore.Api.Repositories;
+using Bookstore.Domain.Interfaces;
+using Bookstore.Infrastructure.Context;
+using Bookstore.Infrastructure.Mappings;
+using Bookstore.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System;
 
@@ -21,6 +21,7 @@ builder.Services.AddDbContext<BookstoreDbContext>(options =>
 
 builder.Services.AddScoped<IClientRepository, ClientRepository>();
 builder.Services.AddAutoMapper(typeof(EntitiesToDTOMappingProfile));
+builder.Services.AddSingleton(RT.Comb.Provider.Sql);
 
 var app = builder.Build();
 

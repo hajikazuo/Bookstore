@@ -1,7 +1,7 @@
-﻿using Bookstore.Api.Models;
+﻿using Bookstore.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Bookstore.Api.Context
+namespace Bookstore.Infrastructure.Context
 {
     public class BookstoreDbContext : DbContext
     {

@@ -1,7 +1,7 @@
-﻿using Bookstore.Api.Models;
+﻿using Bookstore.Domain.Models;
 using System.ComponentModel.DataAnnotations;
 
-namespace Bookstore.Api.DTOs
+namespace Bookstore.Domain.DTOs
 {
     public class ClientDTO
     {

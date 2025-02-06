@@ -1,9 +1,10 @@
 ﻿using AutoMapper;
-using Bookstore.Api.DTOs;
-using Bookstore.Api.Interfaces;
-using Bookstore.Api.Models;
+using Bookstore.Domain.DTOs;
+using Bookstore.Domain.Interfaces;
+using Bookstore.Domain.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RT.Comb;
 
 namespace Bookstore.Api.Controllers
 {
@@ -13,11 +14,13 @@ namespace Bookstore.Api.Controllers
     {
         private readonly IClientRepository _clientRepository;
         private readonly IMapper _mapper;
+        private readonly ICombProvider _comb;
 
-        public ClientController(IClientRepository clientRepository, IMapper mapper)
+        public ClientController(IClientRepository clientRepository, IMapper mapper, ICombProvider comb)
         {
             _clientRepository = clientRepository;
             _mapper = mapper;
+            _comb = comb;
         }
 
         [HttpGet]
@@ -47,14 +50,19 @@ namespace Bookstore.Api.Controllers
         public async Task<ActionResult> Add(ClientDTO clientDTO)
         {
             var client = _mapper.Map<Client>(clientDTO);
+            client.Id = _comb.Create();
+
             _clientRepository.Add(client);
             return await _clientRepository.SaveAllAsync() ? Ok("Successfully registered") : BadRequest("Error when registering");
         }
 
         [HttpPut]
-        public async Task<ActionResult> Update(ClientDTO clientDTO)
+        [Route("{id:Guid}")]
+        public async Task<ActionResult> Update([FromRoute] Guid id,ClientDTO clientDTO)
         {
             var client = _mapper.Map<Client>(clientDTO);
+            client.Id = id;
+
             _clientRepository.Update(client);
             return await _clientRepository.SaveAllAsync() ? Ok("Successfully changed") : BadRequest("Error when changing");
         }

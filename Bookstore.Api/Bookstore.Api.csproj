@@ -18,7 +18,13 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="RT.Comb" Version="4.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Bookstore.Domain\Bookstore.Domain.csproj" />
+    <ProjectReference Include="..\Bookstore.Infrastructure\Bookstore.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

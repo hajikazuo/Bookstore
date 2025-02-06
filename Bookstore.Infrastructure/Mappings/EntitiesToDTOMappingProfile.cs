@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using Bookstore.Api.DTOs;
-using Bookstore.Api.Models;
+using Bookstore.Domain.DTOs;
+using Bookstore.Domain.Models;
 
-namespace Bookstore.Api.Mappings
+namespace Bookstore.Infrastructure.Mappings
 {
     public class EntitiesToDTOMappingProfile : Profile
     {
