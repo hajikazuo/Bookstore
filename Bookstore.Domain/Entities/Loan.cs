@@ -1,6 +1,6 @@
 ﻿namespace Bookstore.Domain.Entities
 {
-    public class BookClientLending
+    public class Loan
     {
         public Guid Id { get; set; }
         public Guid BookId { get; set; }

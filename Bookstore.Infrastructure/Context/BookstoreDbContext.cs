@@ -13,7 +13,7 @@ namespace Bookstore.Infrastructure.Context
 
         public DbSet<Client> Clients { get; set; }
         public DbSet<Book> Books { get; set; }
-        public DbSet<BookClientLending> BookClientLendings { get; set; }
+        public DbSet<Loan> Loans { get; set; }
 
         
 

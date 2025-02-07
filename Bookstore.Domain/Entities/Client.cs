@@ -39,7 +39,6 @@ namespace Bookstore.Domain.Entities
         [MaxLength(13)]
         public string Telephone { get; set; }
 
-        public virtual ICollection<BookClientLending>? Lendings { get; set; }
-        public virtual User? User { get; set; }
+        public virtual ICollection<Loan>? Lendings { get; set; }
     }
 }

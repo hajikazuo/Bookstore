@@ -24,6 +24,6 @@ namespace Bookstore.Domain.Entities
         [MaxLength(50)]
         public string Edition { get; set; }
 
-        public virtual ICollection<BookClientLending>? Lendings { get; set; }
+        public virtual ICollection<Loan>? Lendings { get; set; }
     }
 }

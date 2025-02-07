@@ -32,7 +32,7 @@ namespace Bookstore.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult> GetClient(Guid id)
+        public async Task<ActionResult> GetById(Guid id)
         {
             var client = await _clientRepository.GetById(id);
 

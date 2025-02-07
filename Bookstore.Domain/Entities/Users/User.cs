@@ -10,7 +10,5 @@ namespace Bookstore.Domain.Entities.Users
 {
     public class User : IdentityUser<Guid>
     {
-        public Guid? ClientId { get; set; }  
-        public virtual Client? Client { get; set; }
     }
 }

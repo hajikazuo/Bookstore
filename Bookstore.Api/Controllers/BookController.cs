@@ -33,7 +33,7 @@ namespace Bookstore.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult> GetBook(Guid id)
+        public async Task<ActionResult> GetById(Guid id)
         {
             var book = await _bookRepository.GetById(id);
 

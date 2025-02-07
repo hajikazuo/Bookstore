@@ -4,6 +4,7 @@ using Bookstore.Infrastructure.Context;
 using Bookstore.Infrastructure.Mappings;
 using Bookstore.Infrastructure.Repositories;
 using Bookstore.Infrastructure.Services;
+using loanstore.Domain.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -56,6 +57,7 @@ builder.Services.AddDbContext<BookstoreDbContext>(options =>
 
 builder.Services.AddScoped<IClientRepository, ClientRepository>();
 builder.Services.AddScoped<IBookRepository, BookRepository>();
+builder.Services.AddScoped<ILoanRepository, LoanRepository>();
 
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<ISeedService, SeedService>();

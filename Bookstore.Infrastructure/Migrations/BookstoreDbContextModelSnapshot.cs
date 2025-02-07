@@ -56,36 +56,6 @@ namespace Bookstore.Infrastructure.Migrations
                     b.ToTable("Books");
                 });
 
-            modelBuilder.Entity("Bookstore.Domain.Entities.BookClientLending", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("BookId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ClientId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("DevolutionDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsReturned")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("LendingDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BookId");
-
-                    b.HasIndex("ClientId");
-
-                    b.ToTable("BookClientLendings");
-                });
-
             modelBuilder.Entity("Bookstore.Domain.Entities.Client", b =>
                 {
                     b.Property<Guid>("Id")
@@ -137,6 +107,36 @@ namespace Bookstore.Infrastructure.Migrations
                     b.ToTable("Clients");
                 });
 
+            modelBuilder.Entity("Bookstore.Domain.Entities.Loan", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("BookId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ClientId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DevolutionDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsReturned")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("LendingDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BookId");
+
+                    b.HasIndex("ClientId");
+
+                    b.ToTable("Loans");
+                });
+
             modelBuilder.Entity("Bookstore.Domain.Entities.Users.Role", b =>
                 {
                     b.Property<Guid>("Id")
@@ -173,9 +173,6 @@ namespace Bookstore.Infrastructure.Migrations
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
-
-                    b.Property<Guid?>("ClientId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -222,10 +219,6 @@ namespace Bookstore.Infrastructure.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ClientId")
-                        .IsUnique()
-                        .HasFilter("[ClientId] IS NOT NULL");
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
@@ -341,7 +334,7 @@ namespace Bookstore.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Bookstore.Domain.Entities.BookClientLending", b =>
+            modelBuilder.Entity("Bookstore.Domain.Entities.Loan", b =>
                 {
                     b.HasOne("Bookstore.Domain.Entities.Book", "Book")
                         .WithMany("Lendings")
@@ -356,15 +349,6 @@ namespace Bookstore.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Book");
-
-                    b.Navigation("Client");
-                });
-
-            modelBuilder.Entity("Bookstore.Domain.Entities.Users.User", b =>
-                {
-                    b.HasOne("Bookstore.Domain.Entities.Client", "Client")
-                        .WithOne("User")
-                        .HasForeignKey("Bookstore.Domain.Entities.Users.User", "ClientId");
 
                     b.Navigation("Client");
                 });
@@ -428,8 +412,6 @@ namespace Bookstore.Infrastructure.Migrations
             modelBuilder.Entity("Bookstore.Domain.Entities.Client", b =>
                 {
                     b.Navigation("Lendings");
-
-                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }
