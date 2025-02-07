@@ -29,7 +29,10 @@ namespace Bookstore.Infrastructure.Repositories
 
         public async Task<Loan> GetById(Guid id)
         {
-            return await _context.Loans.FirstOrDefaultAsync(c => c.Id == id);
+            return await _context.Loans
+                .Include(c => c.Client)
+                .Include(c => c.Book)
+                .FirstOrDefaultAsync(c => c.Id == id);
         }
 
         public void Add(Loan loan)

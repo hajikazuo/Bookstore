@@ -61,12 +61,19 @@ namespace Bookstore.Api.Controllers
 
         [HttpPut]
         [Route("{id:Guid}")]
-        public async Task<ActionResult> Update([FromRoute] Guid id, LoanResponseDTO loanDTO)
+        public async Task<ActionResult> Update([FromRoute] Guid id, LoanPutRequestDTO loanPutDTO)
         {
-            var loan = _mapper.Map<Loan>(loanDTO);
-            loan.Id = id;
+            var loanDTO = await _loanRepository.GetById(id);
 
-            _loanRepository.Update(loan);
+            if(loanDTO == null)
+            {
+                return NotFound();
+            }
+
+            loanDTO.DevolutionDate = loanPutDTO.DevolutionDate;
+            loanDTO.IsReturned = loanPutDTO.IsReturned;
+
+            _loanRepository.Update(loanDTO);
             return await _loanRepository.SaveAllAsync() ? Ok("Successfully changed") : BadRequest("Error when changing");
         }
 
