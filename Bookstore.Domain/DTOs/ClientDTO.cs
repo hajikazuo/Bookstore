@@ -1,4 +1,4 @@
-﻿using Bookstore.Domain.Models;
+﻿using Bookstore.Domain.Entities;
 using System.ComponentModel.DataAnnotations;
 
 namespace Bookstore.Domain.DTOs

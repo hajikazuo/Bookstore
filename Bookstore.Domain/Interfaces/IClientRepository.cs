@@ -1,4 +1,4 @@
-﻿using Bookstore.Domain.Models;
+﻿using Bookstore.Domain.Entities;
 
 namespace Bookstore.Domain.Interfaces
 {

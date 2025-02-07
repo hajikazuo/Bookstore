@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Bookstore.Domain.DTOs;
-using Bookstore.Domain.Models;
+using Bookstore.Domain.Entities;
 
 namespace Bookstore.Infrastructure.Mappings
 {

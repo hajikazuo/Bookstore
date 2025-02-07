@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Bookstore.Domain.DTOs;
+using Bookstore.Domain.Entities;
 using Bookstore.Domain.Interfaces;
-using Bookstore.Domain.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RT.Comb;

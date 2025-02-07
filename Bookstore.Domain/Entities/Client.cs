@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Bookstore.Domain.Models
+namespace Bookstore.Domain.Entities
 {
     public class Client
     {

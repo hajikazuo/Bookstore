@@ -1,5 +1,5 @@
-﻿using Bookstore.Domain.Interfaces;
-using Bookstore.Domain.Models;
+﻿using Bookstore.Domain.Entities;
+using Bookstore.Domain.Interfaces;
 using Bookstore.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 
