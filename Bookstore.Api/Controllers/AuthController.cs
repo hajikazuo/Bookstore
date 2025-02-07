@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Bookstore.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class AuthController : ControllerBase
     {
@@ -21,7 +21,6 @@ namespace Bookstore.Api.Controllers
         }
 
         [HttpPost]
-        [Route("Login")]
         public async Task<IActionResult> Login([FromBody] LoginRequestDTO request)
         {
             var identityUser = await _userManager.FindByEmailAsync(request.Email);

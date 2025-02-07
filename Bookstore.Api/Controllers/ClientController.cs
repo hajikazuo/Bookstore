@@ -8,7 +8,7 @@ using RT.Comb;
 
 namespace Bookstore.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class ClientController : ControllerBase
     {

@@ -9,6 +9,7 @@ namespace Bookstore.Infrastructure.Mappings
         public EntitiesToDTOMappingProfile()
         {
             CreateMap<Client, ClientDTO>().ReverseMap();
+            CreateMap<Book, BookDTO>().ReverseMap();
         }
     }
 }

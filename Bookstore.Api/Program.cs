@@ -55,6 +55,7 @@ builder.Services.AddDbContext<BookstoreDbContext>(options =>
 });
 
 builder.Services.AddScoped<IClientRepository, ClientRepository>();
+builder.Services.AddScoped<IBookRepository, BookRepository>();
 
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<ISeedService, SeedService>();
