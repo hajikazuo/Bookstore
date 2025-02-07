@@ -1,9 +1,11 @@
 ﻿using Bookstore.Domain.Entities;
+using Bookstore.Domain.Entities.Users;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Bookstore.Infrastructure.Context
 {
-    public class BookstoreDbContext : DbContext
+    public class BookstoreDbContext : IdentityDbContext<User, Role, Guid>
     {
         public BookstoreDbContext(DbContextOptions<BookstoreDbContext> options) : base(options)
         {
@@ -13,20 +15,7 @@ namespace Bookstore.Infrastructure.Context
         public DbSet<Book> Books { get; set; }
         public DbSet<BookClientLending> BookClientLendings { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<BookClientLending>()
-                .HasOne(bcl => bcl.Book)
-                .WithMany(b => b.Lendings)
-                .HasForeignKey(bcl => bcl.BookId)
-                .OnDelete(DeleteBehavior.ClientSetNull);
-
-            modelBuilder.Entity<BookClientLending>()
-                .HasOne(bcl => bcl.Client)
-                .WithMany(c => c.Lendings)
-                .HasForeignKey(bcl => bcl.ClientId)
-                .OnDelete(DeleteBehavior.ClientSetNull);
-        }
+        
 
     }
 }

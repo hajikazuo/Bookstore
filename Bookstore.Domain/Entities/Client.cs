@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Bookstore.Domain.Entities.Users;
+using System.ComponentModel.DataAnnotations;
 
 namespace Bookstore.Domain.Entities
 {
@@ -39,5 +40,6 @@ namespace Bookstore.Domain.Entities
         public string Telephone { get; set; }
 
         public virtual ICollection<BookClientLending>? Lendings { get; set; }
+        public virtual User? User { get; set; }
     }
 }
