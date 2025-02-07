@@ -24,6 +24,14 @@ builder.Services.AddAutoMapper(typeof(EntitiesToDTOMappingProfile));
 builder.Services.AddSingleton(RT.Comb.Provider.Sql);
 
 var app = builder.Build();
+using (var scope = app.Services.CreateScope())
+{
+
+    //migrations
+    var db = scope.ServiceProvider.GetRequiredService<BookstoreDbContext>();
+    db.Database.Migrate();
+
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

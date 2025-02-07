@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookstore.Domain", "Booksto
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookstore.Infrastructure", "Bookstore.Infrastructure\Bookstore.Infrastructure.csproj", "{1735E253-FD38-4380-9D1A-6D4867C72967}"
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{79F6790B-18AB-4678-BC33-103A3298520E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{1735E253-FD38-4380-9D1A-6D4867C72967}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1735E253-FD38-4380-9D1A-6D4867C72967}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1735E253-FD38-4380-9D1A-6D4867C72967}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79F6790B-18AB-4678-BC33-103A3298520E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79F6790B-18AB-4678-BC33-103A3298520E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79F6790B-18AB-4678-BC33-103A3298520E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79F6790B-18AB-4678-BC33-103A3298520E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
