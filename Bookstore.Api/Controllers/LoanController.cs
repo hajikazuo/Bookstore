@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
+using Bookstore.Api.Extensions;
 using Bookstore.Domain.DTOs;
 using Bookstore.Domain.Entities;
 using Bookstore.Domain.Interfaces;
+using Bookstore.Domain.Pagination;
 using Bookstore.Infrastructure.Repositories;
 using loanstore.Domain.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RT.Comb;
@@ -26,10 +29,13 @@ namespace Bookstore.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Loan>>> GetAll()
+        public async Task<ActionResult<IEnumerable<Loan>>> GetAll([FromQuery] PaginationParams paginationParams)
         {
-            var loans = await _loanRepository.GetAll();
+            var loans = await _loanRepository.GetAll(paginationParams.PageNumber, paginationParams.PageSize);
             var loansDTO = _mapper.Map<IEnumerable<LoanResponseDTO>>(loans);
+            var response = new PagedList<LoanResponseDTO>(paginationParams.PageNumber, paginationParams.PageSize, loans.TotalCount, loansDTO);
+
+            Response.AddPaginationHeader(new PaginationHeader(response.CurrentPage, response.PageSize, response.TotalCount, response.TotalPages));
             return Ok(loansDTO);
         }
 
@@ -51,6 +57,12 @@ namespace Bookstore.Api.Controllers
         [HttpPost]
         public async Task<ActionResult> Add(LoanPostRequestDTO loanDTO)
         {
+            var available = await _loanRepository.CheckAvailability(loanDTO.BookId);
+            if(!available)
+            {
+                return BadRequest("Book not available");
+            }
+
             var loan = _mapper.Map<Loan>(loanDTO);
             loan.Id = _comb.Create();
             loan.LendingDate = DateTime.Now;
@@ -77,6 +89,7 @@ namespace Bookstore.Api.Controllers
             return await _loanRepository.SaveAllAsync() ? Ok("Successfully changed") : BadRequest("Error when changing");
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<ActionResult> Remove(Guid id)
         {

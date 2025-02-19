@@ -1,6 +1,8 @@
 ﻿using Bookstore.Domain.Entities;
 using Bookstore.Domain.Interfaces;
+using Bookstore.Domain.Pagination;
 using Bookstore.Infrastructure.Context;
+using Bookstore.Infrastructure.Helpers;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -19,9 +21,10 @@ namespace Bookstore.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<IEnumerable<Book>> GetAll()
+        public async Task<PagedList<Book>> GetAll(int pageNumber, int pageSize)
         {
-            return await _context.Books.ToListAsync();
+            var query = _context.Books.AsQueryable();
+            return await PaginationHelper.CreateAsync(query, pageNumber, pageSize);
         }
 
         public async Task<Book> GetById(Guid id)

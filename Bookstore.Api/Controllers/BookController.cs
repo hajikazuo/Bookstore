@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
+using Bookstore.Api.Extensions;
 using Bookstore.Domain.DTOs;
 using Bookstore.Domain.Entities;
 using Bookstore.Domain.Interfaces;
+using Bookstore.Domain.Pagination;
 using Bookstore.Infrastructure.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RT.Comb;
@@ -25,11 +28,14 @@ namespace Bookstore.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Book>>> GetAll()
+        public async Task<ActionResult<IEnumerable<Book>>> GetAll([FromQuery] PaginationParams paginationParams)
         {
-            var books = await _bookRepository.GetAll();
+            var books = await _bookRepository.GetAll(paginationParams.PageNumber, paginationParams.PageSize);
             var booksDTO = _mapper.Map<IEnumerable<BookDTO>>(books);
-            return Ok(booksDTO);
+            var response = new PagedList<BookDTO>(paginationParams.PageNumber, paginationParams.PageSize, books.TotalCount, booksDTO);
+
+            Response.AddPaginationHeader(new PaginationHeader(response.CurrentPage, response.PageSize, response.TotalCount, response.TotalPages));
+            return Ok(response);
         }
 
         [HttpGet("{id}")]
@@ -68,6 +74,7 @@ namespace Bookstore.Api.Controllers
             return await _bookRepository.SaveAllAsync() ? Ok("Successfully changed") : BadRequest("Error when changing");
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<ActionResult> Remove(Guid id)
         {

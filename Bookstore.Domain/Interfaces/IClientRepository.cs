@@ -1,10 +1,11 @@
 ﻿using Bookstore.Domain.Entities;
+using Bookstore.Domain.Pagination;
 
 namespace Bookstore.Domain.Interfaces
 {
     public interface IClientRepository
     {
-        Task<IEnumerable<Client>> GetAll();
+        Task<PagedList<Client>> GetAll(int pageNumber, int pageSize);
         Task<Client> GetById(Guid id);
         void Add(Client client);
         void Update(Client client);

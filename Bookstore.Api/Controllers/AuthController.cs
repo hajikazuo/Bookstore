@@ -1,6 +1,7 @@
 ﻿using Bookstore.Domain.DTOs.Auth;
 using Bookstore.Domain.Entities.Users;
 using Bookstore.Domain.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -50,6 +51,7 @@ namespace Bookstore.Api.Controllers
             return ValidationProblem(ModelState);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Register([FromBody] RegisterRequestDTO request)
         {

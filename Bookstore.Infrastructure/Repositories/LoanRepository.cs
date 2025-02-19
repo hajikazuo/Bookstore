@@ -1,5 +1,7 @@
 ﻿using Bookstore.Domain.Entities;
+using Bookstore.Domain.Pagination;
 using Bookstore.Infrastructure.Context;
+using Bookstore.Infrastructure.Helpers;
 using loanstore.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -19,12 +21,14 @@ namespace Bookstore.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<IEnumerable<Loan>> GetAll()
+        public async Task<PagedList<Loan>> GetAll(int pageNumber, int pageSize)
         {
-            return await _context.Loans
+            var query = _context.Loans
                 .Include(c => c.Client)
                 .Include(c => c.Book)
-                .ToListAsync();
+                .AsQueryable();
+
+            return await PaginationHelper.CreateAsync(query, pageNumber, pageSize);
         }
 
         public async Task<Loan> GetById(Guid id)
@@ -53,6 +57,12 @@ namespace Bookstore.Infrastructure.Repositories
         public async Task<bool> SaveAllAsync()
         {
             return await _context.SaveChangesAsync() > 0;
+        }
+
+        public async Task<bool> CheckAvailability(Guid id)
+        {
+            var available = await _context.Loans.Where(x => x.BookId == id && x.IsReturned == false).AnyAsync();
+            return !available;
         }
     }
 }

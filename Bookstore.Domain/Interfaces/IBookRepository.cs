@@ -1,4 +1,5 @@
 ﻿using Bookstore.Domain.Entities;
+using Bookstore.Domain.Pagination;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace Bookstore.Domain.Interfaces
 {
     public interface IBookRepository
     {
-        Task<IEnumerable<Book>> GetAll();
+        Task<PagedList<Book>> GetAll(int pageNumber, int pageSize);
         Task<Book> GetById(Guid id);
         void Add(Book book);
         void Update(Book book);
