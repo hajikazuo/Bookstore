@@ -1,3 +1,4 @@
+using Bookstore.Api.Middleware;
 using Bookstore.Domain.Entities.Users;
 using Bookstore.Domain.Interfaces;
 using Bookstore.Infrastructure.Context;
@@ -116,6 +117,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseMiddleware<ExceptionMiddleware>();
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
